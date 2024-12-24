@@ -1,0 +1,44 @@
+name: SSH to Azure VM # test commit
+# test
+on:
+  push:
+    branches:
+      - production
+
+jobs:
+  ssh:
+    runs-on: ubuntu-22.04
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '20'
+
+    - name: Install PM2 globally
+      run: npm install pm2 -g
+
+    - name: Setup SSH agent
+      uses: webfactory/ssh-agent@v0.5.0
+      with:
+        ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY_VM }}
+
+    - name: SSH into Azure VM
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.SERVER_IP_VM }}
+        username: ${{ secrets.SERVER_USER_VM }}
+        key: ${{ secrets.SSH_PRIVATE_KEY_VM }}
+        port: 49122
+        script: |
+          # Navigate to your application directory
+          cd /home/sybdemo/
+          
+          # Ensure the script.sh is executable
+          chmod +x script.sh
+          
+          # Run the script
+          sh script.sh
+        debug: true
