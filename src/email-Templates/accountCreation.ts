@@ -1,6 +1,4 @@
-export const html = (name: string,
-  url:string
-) => `
+export const html = (name: string, url: string) => `
 <!DOCTYPE html>
 <html>
 <head>

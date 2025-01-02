@@ -53,7 +53,9 @@ export class GlobalExceptionFilter implements ExceptionFilter {
     // Send the response with the appropriate status code and error message
     response.status(status).json({
       statusCode: status,
-      timestamp: new Date().toLocaleString('en-PK', { timeZone: 'Asia/Karachi' }),
+      timestamp: new Date().toLocaleString('en-PK', {
+        timeZone: 'Asia/Karachi',
+      }),
       path: request.url,
       message,
     });

@@ -14,6 +14,8 @@ export class AuditSubscriber implements EntitySubscriberInterface<any> {
     console.log(event.entity);
   }
   beforeUpdate(event: UpdateEvent<any>) {
-    event.entity.updatedAt = new Date().toLocaleString('en-PK', { timeZone: 'Asia/Karachi' });
+    event.entity.updatedAt = new Date().toLocaleString('en-PK', {
+      timeZone: 'Asia/Karachi',
+    });
   }
 }

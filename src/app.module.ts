@@ -9,9 +9,11 @@ import { UsersModule } from './user/user.module';
 import { AuditSubscriber } from './audit/EventSubscriber';
 import { ScheduleModule } from '@nestjs/schedule';
 import { FileHandlingModule } from './file-handling/file-handling.module';
+import { DialableDataModule } from './dialable_data/dialable-data.module';
 
 @Module({
   imports: [
+    DialableDataModule,
     ConfigModule.forRoot({
       isGlobal: true,
     }),
@@ -24,6 +26,7 @@ import { FileHandlingModule } from './file-handling/file-handling.module';
       password: process.env.DB_PASSWORD,
       database: process.env.DB,
       autoLoadEntities: true,
+      entities: [__dirname + '/**/*.entity{.ts,.js}'],
       synchronize: true,
     }),
 
