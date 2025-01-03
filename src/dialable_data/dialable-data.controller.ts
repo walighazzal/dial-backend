@@ -20,7 +20,7 @@ export class DialableDataController {
     @UploadedFile() file: Express.Multer.File,
     @Body('vendorName') vendorName: string,
     @Body('createdBy') createdBy: string,
-  ): Promise<UploadResponseDto> {
+  ) {
     if (!file) {
       throw new Error('File is required.');
     }
