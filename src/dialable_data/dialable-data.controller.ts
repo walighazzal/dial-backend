@@ -18,7 +18,6 @@ export class DialableDataController {
   @UseInterceptors(FileInterceptor('file'))
   async uploadDialableData(
     @UploadedFile() file: Express.Multer.File,
-    @Body('vendorId') vendorId: string,
     @Body('vendorName') vendorName: string,
     @Body('createdBy') createdBy: string,
   ): Promise<UploadResponseDto> {
@@ -26,7 +25,6 @@ export class DialableDataController {
       throw new Error('File is required.');
     }
     const vendor = await this.dialableDataService.processVendor(
-      vendorId,
       vendorName,
       createdBy,
     );

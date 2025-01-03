@@ -6,9 +6,10 @@ import { calculateStateDetails } from './utils/state-calculator.util';
 
 @Injectable()
 export class DialableDataService {
-  async processVendor(vendorId: string, vendorName: string, createdBy: string) {
+  async processVendor(vendorName: string, createdBy: string) {
     // Logic to create or fetch the vendor
-    return { id: vendorId || 'sample-vendor-id', name: vendorName };
+    const vendorId = 'generated-vendor-id';
+    return { id: vendorId, name: vendorName };
   }
 
   async processFile(
@@ -33,17 +34,14 @@ export class DialableDataService {
       ...calculateStateDetails(number),
     }));
 
-    // Save to DB (mocked here)
-    console.log(
-      `Saving ${stateDetails.length} records to the database for vendor: ${vendorId}`,
-    );
+    // Save to dialable-data entity 
+    
 
     // Return result
     return {
       uploadId: 'generated-upload-id',
       newRecords: stateDetails.length - duplicates.size,
       duplicateRecords: duplicates.size,
-      resultFilePath: `/results/result-${Date.now()}.xlsx`,
     };
   }
 
