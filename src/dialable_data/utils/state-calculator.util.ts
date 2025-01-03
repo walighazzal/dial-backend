@@ -1,8 +1,12 @@
+import { areaCodeMapping } from './areaCodeMapping';
+
 export const calculateStateDetails = (number: string) => {
-  // Mocked logic for calculating state details
+  
+  const mappedItem = areaCodeMapping[number?.toString().substring(0, 3)];
   return {
-    stateName: 'Sample State',
-    stateCode: 'SS',
-    areaCode: number.substring(0, 3),
+    stateName: mappedItem?.stateName,
+    stateCode: mappedItem?.stateCode,
+    areaCode: number?.toString().substring(0, 3),
   };
 };
+
