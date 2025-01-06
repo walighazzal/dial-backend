@@ -64,7 +64,8 @@ export class DialableDataService {
     // Return result
     return {
       uploadId: 'generated-upload-id',
-      newRecords: stateDetails.length - duplicates.size,
+      // newRecords: stateDetails.length - duplicates.size,
+      newRecords: stateDetails.length,
       duplicateRecords: duplicates.size,
       
     };
