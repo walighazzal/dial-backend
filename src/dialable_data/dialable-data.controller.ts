@@ -1,11 +1,11 @@
 import {
   Controller,
   Post,
-  UploadedFile,
+  UploadedFiles,
   UseInterceptors,
   Body,
 } from '@nestjs/common';
-import { FileInterceptor } from '@nestjs/platform-express';
+import { FilesInterceptor } from '@nestjs/platform-express';
 import { DialableDataService } from './dialable-data.service';
 import { CreateVendorDto } from './dtos/create-vendor.dto';
 import { UploadResponseDto } from './dtos/upload-response.dto';
@@ -15,21 +15,21 @@ export class DialableDataController {
   constructor(private readonly dialableDataService: DialableDataService) {}
 
   @Post('upload')
-  @UseInterceptors(FileInterceptor('file'))
+  @UseInterceptors(FilesInterceptor('files'))
   async uploadDialableData(
-    @UploadedFile() file: Express.Multer.File,
+    @UploadedFiles() files: Express.Multer.File[],
     @Body('vendorName') vendorName: string,
     @Body('createdBy') createdBy: string,
   ) {
-    if (!file) {
+    if (!files) {
       throw new Error('File is required.');
     }
     const vendor = await this.dialableDataService.processVendor(
       vendorName,
       createdBy,
     );
-    const response = await this.dialableDataService.processFile(
-      file,
+    const response = await this.dialableDataService.processFiles(
+      files,
       vendor.id,
       createdBy,
     );
@@ -41,3 +41,6 @@ export class DialableDataController {
     return this.dialableDataService.createVendor(createVendorDto);
   }
 }
+
+
+
