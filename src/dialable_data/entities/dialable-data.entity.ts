@@ -17,5 +17,4 @@ export class DialableData extends Audit {
 
   @Column()
   areaCode: string;
-
 }

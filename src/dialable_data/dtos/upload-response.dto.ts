@@ -1,4 +1,4 @@
-import { IsString } from "class-validator";
+import { IsString } from 'class-validator';
 
 export class UploadResponseDto {
   // uploadId: string;
@@ -9,19 +9,15 @@ export class UploadResponseDto {
   // duplicateRecords: number;
   // uploadFilePath: string;
 
+  @IsString()
+  number: string;
 
-   @IsString()
-    number: string;
-  
-    @IsString()
-    stateName: string;
-  
-    @IsString()
-    stateCode: string;
-  
-    @IsString()
-    areaCode: string;
+  @IsString()
+  stateName: string;
 
-   
+  @IsString()
+  stateCode: string;
 
+  @IsString()
+  areaCode: string;
 }
