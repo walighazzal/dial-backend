@@ -1,9 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { parse } from 'csv-parse/sync';
-import {
-  calculateLengthInSeconds,
-  calculateStateDetails,
-} from '../dialing_logs/utils/phone-number.utils';
+import { calculateStateDetails, calculateLengthInSeconds } from 'src/utils/functions';
+
 
 @Injectable()
 export class DialingLogsService {

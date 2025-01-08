@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { DialingLogsController } from './dialing-logs.controller';
 import { DialingLogsService } from './dialing-logs.service';
+import { DialingLogsController } from './dialing-logs.controller';
 
 describe('DialingLogsController', () => {
   let controller: DialingLogsController;
