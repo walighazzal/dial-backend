@@ -1,9 +1,9 @@
-import { NestFactory } from '@nestjs/core';
-import { ConfigService } from '@nestjs/config';
-import * as compression from 'compression';
 import { ValidationPipe } from '@nestjs/common';
-import { AppModule } from './app.module';
 import { CorsOptions } from '@nestjs/common/interfaces/external/cors-options.interface';
+import { ConfigService } from '@nestjs/config';
+import { NestFactory } from '@nestjs/core';
+import * as compression from 'compression';
+import { AppModule } from './app.module';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
@@ -13,6 +13,7 @@ async function bootstrap() {
   // Use global validation pipe
   app.useGlobalPipes(
     new ValidationPipe({
+      whitelist: true,
       transform: true,
     }),
   );

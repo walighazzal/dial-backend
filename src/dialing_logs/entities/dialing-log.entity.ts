@@ -6,7 +6,7 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 
-@Entity('dialing_logs')
+@Entity()
 export class DialingLog {
   @PrimaryGeneratedColumn()
   id: number;

@@ -1,10 +1,8 @@
 import { Module } from '@nestjs/common';
-import { DialingLogsController } from './controllers/dialing-logs.controller';
-import { DialingLogsService } from './services/dialing-logs.service';
-import { FileProcessingService } from './services/file-processing.service';
-
+import { DialingLogsController } from 'src/dialing-logs/dialing-logs.controller';
+import { DialingLogsService } from '../dialing-logs/dialing-logs.service';
 @Module({
   controllers: [DialingLogsController],
-  providers: [DialingLogsService, FileProcessingService],
+  providers: [DialingLogsService],
 })
 export class DialingLogsModule {}

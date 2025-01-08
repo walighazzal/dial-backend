@@ -8,7 +8,6 @@ import {
 import { FilesInterceptor } from '@nestjs/platform-express';
 import { DialableDataService } from './dialable-data.service';
 import { CreateVendorDto } from './dtos/create-vendor.dto';
-// import { UploadResponseDto } from './dtos/upload-response.dto';
 
 @Controller('dialable-data')
 export class DialableDataController {

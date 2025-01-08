@@ -4,7 +4,7 @@ import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 @Entity()
 export class DialableData extends Audit {
   @PrimaryGeneratedColumn('uuid')
-  dialableDataId: string;
+  id: string;
 
   @Column()
   number: string;
