@@ -3,22 +3,22 @@ import {
   HttpException,
   HttpStatus,
   Post,
-  UploadedFile,
+  UploadedFiles,
   UseInterceptors,
 } from '@nestjs/common';
-import { FileInterceptor } from '@nestjs/platform-express';
+import { FilesInterceptor } from '@nestjs/platform-express';
 import { DialingLogsService } from './dialing-logs.service';
 
 @Controller('dialing-logs')
 export class DialingLogsController {
-  constructor(private readonly dialingLogsService: DialingLogsService) {}
+  constructor(private readonly dialingLogsService: DialingLogsService) { }
 
   @Post('upload')
-  @UseInterceptors(FileInterceptor('file'))
-  async uploadDialingLog(@UploadedFile() file: Express.Multer.File) {
-    if (!file) {
+  @UseInterceptors(FilesInterceptor('file'))
+  async uploadDialingLog(@UploadedFiles() files: Express.Multer.File[]) {
+    if (!files) {
       throw new HttpException('File not provided', HttpStatus.BAD_REQUEST);
     }
-    return await this.dialingLogsService.processFile(file);
+    return await this.dialingLogsService.processFiles(files);
   }
 }
