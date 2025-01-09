@@ -1,42 +1,38 @@
-import { Audit } from "src/audit/audit.entity";
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
-
-
+import { Audit } from 'src/audit/audit.entity';
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class DialingLog extends Audit {
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
 
-    @PrimaryGeneratedColumn()
-    dialingLogId: string;
+  @Column()
+  phoneNumberDialed: string;
 
-    @Column()
-    phoneNumberDialed: string;
+  @Column()
+  fileName: string;
 
-    @Column()
-    fileName: string;
+  @Column()
+  areaCode: string;
 
-    @Column()
-    areaCode: string;
+  @Column()
+  stateName: string;
 
-    @Column()
-    stateName: string;
+  @Column()
+  stateCode: string;
 
-    @Column()
-    stateCode: string;
+  @Column()
+  totalCount: number;
 
-    @Column()
-    totalCount: number;
+  @Column()
+  lengthInSecs: number;
 
-    @Column()
-    lengthInSecs: number;
+  @Column()
+  callDates: string;
 
-    @Column()
-    callDates: string;
+  @Column()
+  statusNames: string;
 
-    @Column()
-    statusNames: string;
-
-    @Column()
-    fileNames: string;
-
+  @Column()
+  fileNames: string;
 }

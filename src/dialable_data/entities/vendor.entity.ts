@@ -4,7 +4,7 @@ import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 @Entity()
 export class Vendor extends Audit {
   @PrimaryGeneratedColumn('uuid')
-  vendorId: string;
+  id: string;
 
   @Column()
   name: string;
