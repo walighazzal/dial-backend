@@ -1,5 +1,6 @@
 import { Audit } from 'src/audit/audit.entity';
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { DialingLog } from 'src/dialing-logs/entities/dialing-log.entity';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class DialableData extends Audit {
@@ -17,4 +18,7 @@ export class DialableData extends Audit {
 
   @Column()
   areaCode: string;
+
+  @OneToMany(() => DialingLog, (log) => log.dialableData)
+  dialingLogs: DialingLog[];
 }
