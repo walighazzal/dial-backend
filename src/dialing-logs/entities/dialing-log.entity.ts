@@ -10,8 +10,8 @@ export class DialingLog extends Audit {
   @Column()
   phoneNumberDialed: string;
 
-  @Column()
-  fileName: string;
+  // @Column()
+  // fileName: string;
 
   @Column()
   areaCode: string;
@@ -37,6 +37,6 @@ export class DialingLog extends Audit {
   @Column()
   fileNames: string;
 
-  @ManyToOne(() => DialableData, (data) => data.dialingLogs)
-  dialableData: DialableData;
+  // @ManyToOne(() => DialableData, (data) => data.dialingLogs)
+  // dialableData: DialableData;
 }
