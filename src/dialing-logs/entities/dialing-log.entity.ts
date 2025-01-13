@@ -26,7 +26,7 @@ export class DialingLog extends Audit {
   totalCount: number;
 
   @Column()
-  lengthInSecs: number;
+  lengthInSecs: string;
 
   @Column()
   callDates: string;
