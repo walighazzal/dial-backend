@@ -42,39 +42,5 @@ export class DialableDataController {
     return this.dialableDataService.createVendor(createVendorDto);
   }
 
-  // @Get('merge')
-  // async getMergedData(
-  //   @Query('createdBy') createdBy: string,
-  // ): Promise<any> {
-  //   // Fetch data from the database
-  //   const dialableData = await this.dialableDataService.getDialableDataByCreatedBy(createdBy);
-  //   const dialingLogs = await this.dialableDataService.getDialingLogsByCreatedBy(createdBy);
-
-  //   // Merge the data
-  //   const mergedResults = await this.dialableDataService.mergeDialableDataWithLogs(
-  //     dialableData,
-  //     dialingLogs,
-  //   );
-
-  //   return mergedResults;
-  // }
-
-  // @Post('merge-and-store')
-  // async mergeAndStoreDialingLogs(@Query('createdBy') createdBy: string): Promise<any[]> {
-  //   // Step 1: Fetch data
-  //   const dialableData = await this.dialableDataService.getDialableDataByCreatedBy(createdBy);
-  //   const dialingLogs = await this.dialableDataService.getDialingLogsByCreatedBy(createdBy);
-
-  //   // Step 2: Merge data
-  //   const mergedData = await this.dialableDataService.mergeDialableDataWithLogs(
-  //     dialableData,
-  //     dialingLogs,
-  //   );
-
-  //   // Step 3: Save merged data to DialingLogs table
-  //   await this.dialableDataService.saveMergedDataToDialingLogs(mergedData);
-
-  //   return mergedData;
-  // }
 
 }

@@ -13,6 +13,8 @@ import { DialingLogsModule } from './dialing-logs/dialing-logs.module';
 import { DialingLogsService } from './dialing-logs/dialing-logs.service';
 import { FileHandlingModule } from './file-handling/file-handling.module';
 import { UsersModule } from './user/user.module';
+import { DncModule } from './dnc/dnc.module';
+import { MergedDataModule } from './merged-data/merged-data.module';
 
 @Module({
   imports: [
@@ -38,6 +40,8 @@ import { UsersModule } from './user/user.module';
     UsersModule,
     FileHandlingModule,
     DialingLogsModule,
+    DncModule,
+    MergedDataModule,
   ],
   controllers: [AppController],
   providers: [

@@ -36,29 +36,4 @@ export class DialingLogsController {
   }
 
 
-
-  // @Post('upload')
-  // @UseInterceptors(FilesInterceptor('file'))
-  // async uploadDialingLog(
-  //   @UploadedFiles() files: Express.Multer.File[],
-  //   @Body('createdBy') createdBy: string, // Accept createdBy from the request body
-  // ) {
-  //   if (!files) {
-  //     throw new HttpException('File not provided', HttpStatus.BAD_REQUEST);
-  //   }
-  //   if (!createdBy) {
-  //     throw new HttpException('CreatedBy is required', HttpStatus.BAD_REQUEST);
-  //   }
-  //   return await this.dialingLogsService.processFiles(files, createdBy);
-  // }
-
-
-  // @Post('save')
-  // async saveData(@Body() data: any) {
-  //   return this.dialingLogsService.saveData(data);
-  // }
-
-
-
-
 }
