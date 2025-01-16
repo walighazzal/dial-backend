@@ -37,6 +37,6 @@ export class DialingLog extends Audit {
   @Column()
   fileNames: string;
 
-  // @ManyToOne(() => DialableData, (data) => data.dialingLogs)
-  // dialableData: DialableData;
+  @Column()
+  sessionId: string;
 }

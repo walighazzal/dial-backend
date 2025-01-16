@@ -1,34 +1,36 @@
 import { IsString, IsOptional, IsNumber, IsNotEmpty } from 'class-validator';
 
 export class CreateDncDto {
+  @IsString()
+  phoneNumber: string;
 
-    @IsString()
-    phoneNumber: string;
+  @IsNumber()
+  totalCount: number;
 
-    @IsNumber()
-    totalCount: number;
+  @IsString()
+  lengthInSecs: string;
 
-    @IsString()
-    lengthInSecs: string;
+  @IsString()
+  callDates: string;
 
-    @IsString()
-    callDates: string;
+  @IsString()
+  statusNames: string;
 
-    @IsString()
-    statusNames: string;
+  @IsString()
+  fileNames: string;
 
-    @IsString()
-    fileNames: string;
+  @IsString()
+  areaCode: string;
 
-    @IsString()
-    areaCode: string;
+  @IsString()
+  stateCode: string;
 
-    @IsString()
-    stateCode: string;
+  @IsString()
+  stateName: string;
 
-    @IsString()
-    stateName: string;
+  @IsString()
+  dncFileName: string;
 
-    @IsString()
-    dncFileName: string;
+  @IsString()
+  sessionId: string;
 }

@@ -6,10 +6,10 @@ import { DataSource, Repository } from 'typeorm';
 import { Vendor } from './entities/vendor.entity';
 import { DialableData } from './entities/dialable-data.entity';
 import { DialingLog } from 'src/dialing-logs/entities/dialing-log.entity';
-
+import { v4 as uuidv4 } from 'uuid';
 @Injectable()
 export class DialableDataService {
-  constructor(private dataSource: DataSource) { }
+  constructor(private dataSource: DataSource) {}
 
   async processVendor(vendorName: string, createdBy: string) {
     // Logic to create or fetch the vendor
@@ -30,6 +30,7 @@ export class DialableDataService {
     createdBy: string,
   ) {
     const allParsedData = files.flatMap((file) => parseFile(file));
+    const sessionId = uuidv4();
 
     const uniqueNumbers = new Set<string>();
     const duplicates = new Set<string>();
@@ -55,6 +56,7 @@ export class DialableDataService {
           stateCode: data.stateCode,
           areaCode: data.areaCode,
           number: data.phone_number,
+          sessionId,
         }),
       ),
     );
@@ -64,13 +66,7 @@ export class DialableDataService {
       uploadId: 'generated-upload-id',
       newRecords: stateDetails.length,
       duplicateRecords: duplicates.size,
+      sessionId,
     };
   }
-
-
-
-
-
-
 }
-

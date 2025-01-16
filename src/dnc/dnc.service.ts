@@ -11,10 +11,14 @@ import { Response } from 'express';
 export class DncService {
   constructor(
     @InjectRepository(Dnc) private readonly dncRepository: Repository<Dnc>,
-    @InjectRepository(DialingLog) private readonly dialingLogRepository: Repository<DialingLog>,
-  ) { }
+    @InjectRepository(DialingLog)
+    private readonly dialingLogRepository: Repository<DialingLog>,
+  ) {}
 
-  async processDncFile(file: Express.Multer.File): Promise<any> {
+  async processDncFile(
+    file: Express.Multer.File,
+    sessionId: string,
+  ): Promise<any> {
     let dncData: any[] = [];
 
     // Parse the uploaded file
@@ -30,11 +34,18 @@ export class DncService {
       const sheetName = workbook.SheetNames[0];
       dncData = xlsx.utils.sheet_to_json(workbook.Sheets[sheetName]);
     } else {
-      throw new Error('Unsupported file format. Only CSV and XLSX files are allowed.');
+      throw new Error(
+        'Unsupported file format. Only CSV and XLSX files are allowed.',
+      );
     }
 
     // Extract phone numbers
-    const dncPhoneNumbers = dncData.map((row) => row['Phone Number'] || row['Phone#'] || row['phone_number_dialed']).filter(Boolean);
+    const dncPhoneNumbers = dncData
+      .map(
+        (row) =>
+          row['Phone Number'] || row['Phone#'] || row['phone_number_dialed'],
+      )
+      .filter(Boolean);
 
     if (dncPhoneNumbers.length === 0) {
       throw new Error('No valid phone numbers found in the DNC file.');
@@ -43,7 +54,9 @@ export class DncService {
     // Query DialingLog for matching phone numbers
     const matchedResults = await this.dialingLogRepository
       .createQueryBuilder('dialingLog')
-      .where('dialingLog.phoneNumberDialed IN (:...dncPhoneNumbers)', { dncPhoneNumbers })
+      .where('dialingLog.phoneNumberDialed IN (:...dncPhoneNumbers)', {
+        dncPhoneNumbers,
+      })
       .getMany();
 
     // Prepare and save matched results to DNC entity
@@ -59,18 +72,17 @@ export class DncService {
         stateCode: entry.stateCode,
         stateName: entry.stateName,
         dncFileName: file.originalname,
+        sessionId: sessionId,
       });
     });
 
-    // Save to the DNC table  
+    // Save to the DNC tables
     await this.dncRepository.save(dncEntries);
 
-    return { message: 'DNC file processed successfully.', savedCount: dncEntries.length, dncEntries };
+    return {
+      message: 'DNC file processed successfully.',
+      savedCount: dncEntries.length,
+      dncEntries,
+    };
   }
-
-
-
-
-
-
 }

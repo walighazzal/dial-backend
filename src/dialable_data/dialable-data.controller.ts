@@ -13,7 +13,7 @@ import { CreateVendorDto } from './dtos/create-vendor.dto';
 
 @Controller('dialable-data')
 export class DialableDataController {
-  constructor(private readonly dialableDataService: DialableDataService) { }
+  constructor(private readonly dialableDataService: DialableDataService) {}
 
   @Post('upload')
   @UseInterceptors(FilesInterceptor('files'))
@@ -29,6 +29,7 @@ export class DialableDataController {
       vendorName,
       createdBy,
     );
+
     const response = await this.dialableDataService.processFiles(
       files,
       vendor.id,
@@ -41,6 +42,4 @@ export class DialableDataController {
   async createVendor(@Body() createVendorDto: CreateVendorDto): Promise<any> {
     return this.dialableDataService.createVendor(createVendorDto);
   }
-
-
 }

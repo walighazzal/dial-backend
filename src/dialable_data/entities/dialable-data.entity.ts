@@ -19,6 +19,6 @@ export class DialableData extends Audit {
   @Column()
   areaCode: string;
 
-  // @OneToMany(() => DialingLog, (log) => log.dialableData)
-  // dialingLogs: DialingLog[];
+  @Column()
+  sessionId: string;
 }

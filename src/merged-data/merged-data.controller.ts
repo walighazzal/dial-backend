@@ -1,16 +1,26 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseInterceptors, UploadedFile, Res } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  UseInterceptors,
+  UploadedFile,
+  Res,
+} from '@nestjs/common';
 import { MergedDataService } from './merged-data.service';
 import { Response } from 'express';
 
 @Controller('merged-data')
 export class MergedDataController {
-  constructor(private readonly mergedDataService: MergedDataService) { }
-
+  constructor(private readonly mergedDataService: MergedDataService) {}
 
   // Endpoint to process and merge data from entities
   @Post('merge')
-  async mergeData() {
-    return await this.mergedDataService.mergeEntities();
+  async mergeData(@Body('sessionId') sessionId: string) {
+    return await this.mergedDataService.mergeEntities(sessionId);
   }
 
   // Endpoint to fetch all combined data
@@ -18,7 +28,4 @@ export class MergedDataController {
   async getAllCombinedData() {
     return await this.mergedDataService.getAllCombinedData();
   }
-
-
-
 }

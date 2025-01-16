@@ -68,7 +68,6 @@
 //   }
 // }
 
-
 import { Injectable } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -82,13 +81,16 @@ import { MergedData } from './entities/merged-datum.entity';
 @Injectable()
 export class MergedDataService {
   constructor(
-    @InjectRepository(DialableData) private readonly dialableDataRepository: Repository<DialableData>,
-    @InjectRepository(DialingLog) private readonly dialingLogRepository: Repository<DialingLog>,
+    @InjectRepository(DialableData)
+    private readonly dialableDataRepository: Repository<DialableData>,
+    @InjectRepository(DialingLog)
+    private readonly dialingLogRepository: Repository<DialingLog>,
     @InjectRepository(Dnc) private readonly dncRepository: Repository<Dnc>,
-    @InjectRepository(MergedData) private readonly combinedDataRepository: Repository<MergedData>,
-  ) { }
+    @InjectRepository(MergedData)
+    private readonly combinedDataRepository: Repository<MergedData>,
+  ) {}
 
-  async mergeEntities(): Promise<any> {
+  async mergeEntities(sessionId: string): Promise<any> {
     // Fetch data from all entities
     const dialableData = await this.dialableDataRepository.find();
     const dialingLogData = await this.dialingLogRepository.find();
@@ -103,8 +105,12 @@ export class MergedDataService {
 
     // Create the combined data
     const combinedData = Array.from(phoneNumbers).map((phoneNumber) => {
-      const dialableMatch = dialableData.find((data) => data.number === phoneNumber);
-      const dialingLogMatch = dialingLogData.find((log) => log.phoneNumberDialed === phoneNumber);
+      const dialableMatch = dialableData.find(
+        (data) => data.number === phoneNumber,
+      );
+      const dialingLogMatch = dialingLogData.find(
+        (log) => log.phoneNumberDialed === phoneNumber,
+      );
       const dncMatch = dncData.find((dnc) => dnc.phoneNumber === phoneNumber);
 
       return this.combinedDataRepository.create({
@@ -119,6 +125,7 @@ export class MergedDataService {
         fileNames: dialingLogMatch?.fileNames || null,
         dnc: dncMatch ? 'DNC' : null,
         dncFileName: dncMatch?.dncFileName || null,
+        sessionId,
       });
     });
 
@@ -137,9 +144,6 @@ export class MergedDataService {
     };
   }
 
-
-
-
   private createBatches<T>(data: T[], batchSize: number): T[][] {
     const batches: T[][] = [];
     for (let i = 0; i < data.length; i += batchSize) {
@@ -152,7 +156,4 @@ export class MergedDataService {
   async getAllCombinedData(): Promise<MergedData[]> {
     return await this.combinedDataRepository.find();
   }
-
-
-
 }
