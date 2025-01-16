@@ -15,6 +15,7 @@ import { FileHandlingModule } from './file-handling/file-handling.module';
 import { UsersModule } from './user/user.module';
 import { DncModule } from './dnc/dnc.module';
 import { MergedDataModule } from './merged-data/merged-data.module';
+import { RefDataModule } from './ref-data/ref-data.module';
 
 @Module({
   imports: [
@@ -42,6 +43,7 @@ import { MergedDataModule } from './merged-data/merged-data.module';
     DialingLogsModule,
     DncModule,
     MergedDataModule,
+    RefDataModule,
   ],
   controllers: [AppController],
   providers: [

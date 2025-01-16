@@ -1,8 +1,11 @@
 import { Audit } from 'src/audit/audit.entity';
+import { RefRole } from 'src/ref-data/entities/ref-data.entity';
 import {
   Column,
   DeleteDateColumn,
   Entity,
+  JoinColumn,
+  ManyToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 
@@ -29,9 +32,6 @@ export class Users extends Audit {
   @Column()
   roleId: string;
 
-  @Column()
-  roleName: string;
-
   @DeleteDateColumn()
   deletedAt: Date;
 
@@ -40,4 +40,8 @@ export class Users extends Audit {
 
   @Column({ nullable: true, type: 'timestamp' })
   resetPasswordTokenExpiry: Date;
+
+  @ManyToOne(() => RefRole, (refRole) => refRole.users)
+  @JoinColumn({ name: 'roleId' })
+  role: RefRole;
 }
